@@ -152,7 +152,7 @@ WHERE st.enroll_status = 0
         </args>
         <columns>
         <column column="TEACHERS.SCHOOLID">School_id</column>
-        <column column="TEACHERS.ID">Teacher_id</column>
+        <column column="TEACHERS.TEACHERNUMBER">Teacher_id</column>
         <column column="TEACHERS.TEACHERNUMBER">Teacher_number</column>
         <column column="TEACHERS.EMAIL_ADDR">Teacher_email</column>
         <column column="TEACHERS.FIRST_NAME">First_name</column>
@@ -165,7 +165,7 @@ WHERE st.enroll_status = 0
 			<![CDATA[
 			SELECT
 				teachers.schoolid as School_id,
-				teachers.id as Teacher_id,
+				teachers.teachernumber as Teacher_id,
 				teachers.teachernumber as Teacher_number,
 				teachers.email_addr as Teacher_email,
 				teachers.first_name as First_name,
@@ -190,7 +190,7 @@ WHERE st.enroll_status = 0
         </args>
         <columns>
         <column column="TEACHERS.HOMESCHOOLID">School_id</column>
-        <column column="TEACHERS.DCID">Staff_id</column>
+        <column column="TEACHERS.TEACHERNUMBER">Staff_id</column>
         <column column="TEACHERS.EMAIL_ADDR">Admin_email</column>
         <column column="TEACHERS.FIRST_NAME">First_name</column>
         <column column="TEACHERS.LAST_NAME">Last_name</column>
@@ -203,7 +203,7 @@ WHERE st.enroll_status = 0
 			<![CDATA[
 			SELECT
 				'DEFAULT_DISTRICT_OFFICE' as School_id,
-				dcid,
+				teachernumber,
 				email_addr,
 				first_name,
 				last_name,
@@ -245,19 +245,22 @@ WHERE st.enroll_status = 0
 			SELECT
 			sec.schoolid as School_id,
 			sec.id as Section_id,
-			sec.teacher as Teacher_id,
-			(select teacherid from (select teacherid, rownum rn from SectionTeacher 
+			teachers.teachernumber as Teacher_id,
+			(select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+				inner join teachers t on t.id = SectionTeacher.teacherid
 				where sectionteacher.roleid != 21
 				and SectionTeacher.sectionid = sec.id
-				order by teacherid) where rn = 1) as Teacher_2_id,
-				(select teacherid from (select teacherid, rownum rn from SectionTeacher 
+				order by teacherid) where rn = 2) as Teacher_2_id,
+			(select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+				inner join teachers t on t.id = SectionTeacher.teacherid
 				where sectionteacher.roleid != 21
 				and SectionTeacher.sectionid = sec.id
-				order by teacherid) where rn = 2) as Teacher_3_id,
-			(select teacherid from (select teacherid, rownum rn from SectionTeacher 
+				order by teacherid) where rn = 3) as Teacher_3_id,
+			(select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+				inner join teachers t on t.id = SectionTeacher.teacherid
 				where sectionteacher.roleid != 21
 				and SectionTeacher.sectionid = sec.id
-				order by teacherid) where rn = 3) as Teacher_4_id,
+				order by teacherid) where rn = 4) as Teacher_4_id,
 			courses.course_name||' with '||teachers.first_name||' '||teachers.last_name||' ('||courses.course_number||'.'||sec.section_number||')' as Name,
 			sec.section_number as Section_Number,
 			case 
