@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://plugin.powerschool.pearson.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd"
+        name="MISP Clever SFTP"
+        version="1.0"
+        description="MISP Clever SFTP CSV files Generation">
+    <oauth></oauth>
+    <publisher name="Marymount International School, Paris">
+       <contact email="ysaludes@marymount.fr"/>
+    </publisher>
+    <access_request>
+        <field table="STUDENTS" field="schoolid" access="ViewOnly"/>
+        <field table="STUDENTS" field="dcid" access="ViewOnly"/>
+        <field table="STUDENTS" field="enroll_status" access="ViewOnly"/>
+        <field table="STUDENTS" field="ID" access="ViewOnly"/>
+        <field table="STUDENTS" field="STUDENT_NUMBER" access="ViewOnly"/>
+        <field table="STUDENTS" field="STATE_STUDENTNUMBER" access="ViewOnly"/>
+        <field table="STUDENTS" field="LAST_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="MIDDLE_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="STUDENTS" field="GRADE_LEVEL" access="ViewOnly"/>
+        <field table="STUDENTS" field="GENDER" access="ViewOnly"/>
+        <field table="STUDENTS" field="DOB" access="ViewOnly"/>
+        <field table="STUDENTS" field="ETHNICITY" access="ViewOnly"/>
+        <field table="STUDENTS" field="FEDETHNICITY" access="ViewOnly"/>
+        <field table="STUDENTS" field="LUNCHSTATUS" access="ViewOnly"/>
+        <field table="STUDENTS" field="STREET" access="ViewOnly"/>
+        <field table="STUDENTS" field="CITY" access="ViewOnly"/>
+        <field table="STUDENTS" field="STATE" access="ViewOnly"/>
+        <field table="STUDENTS" field="ZIP" access="ViewOnly"/>
+
+        <field table="U_DEF_EXT_STUDENTS" field="EMAIL" access="ViewOnly"/>
+        <field table="U_DEF_EXT_STUDENTS" field="PASSWORD" access="ViewOnly"/>
+        <field table="U_DEF_EXT_STUDENTS" field="studentsdcid" access="ViewOnly"/>
+        <field table="U_DEF_EXT_STUDENTS" field="ADMISS_SSPRO_EAL" access="ViewOnly"/>
+        <field table="U_DEF_EXT_STUDENTS" field="ADMISS_SSPRO_ILC" access="ViewOnly"/>
+
+        <field table="TEACHERS" field="SCHOOLID" access="ViewOnly"/>
+        <field table="TEACHERS" field="ID" access="ViewOnly"/>
+        <field table="TEACHERS" field="TEACHERNUMBER" access="ViewOnly"/>
+        <field table="TEACHERS" field="EMAIL_ADDR" access="ViewOnly"/>
+        <field table="TEACHERS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="TEACHERS" field="MIDDLE_NAME" access="ViewOnly"/>
+        <field table="TEACHERS" field="LAST_NAME" access="ViewOnly"/>
+        <field table="TEACHERS" field="TITLE" access="ViewOnly"/>
+        <field table="TEACHERS" field="HOME_PHONE" access="ViewOnly"/>
+            
+
+        <field table="SCHOOLS" field="SCHOOL_NUMBER" access="ViewOnly"/>
+        <field table="SCHOOLS" field="NAME" access="ViewOnly"/>
+        <field table="SCHOOLS" field="LOW_GRADE" access="ViewOnly"/>
+        <field table="SCHOOLS" field="HIGH_GRADE" access="ViewOnly"/>
+        <field table="SCHOOLS" field="PRINCIPAL" access="ViewOnly"/>
+        <field table="SCHOOLS" field="PRINCIPALEMAIL" access="ViewOnly"/>
+        <field table="SCHOOLS" field="SCHOOLADDRESS" access="ViewOnly"/>
+        <field table="SCHOOLS" field="SCHOOLCITY" access="ViewOnly"/>
+        <field table="SCHOOLS" field="SCHOOLSTATE" access="ViewOnly"/>
+        <field table="SCHOOLS" field="SCHOOLZIP" access="ViewOnly"/>
+        <field table="SCHOOLS" field="SCHOOLPHONE" access="ViewOnly"/>
+
+        <field table="COURSES" field="COURSE_NAME" access="ViewOnly"/>
+
+        <field table="CC" field="SCHOOLID" access="ViewOnly"/>
+        <field table="CC" field="SECTIONID" access="ViewOnly"/>
+        <field table="CC" field="STUDENTID" access="ViewOnly"/>
+
+        <field table="SECTIONS" field="SCHOOLID" access="ViewOnly"/>
+        <field table="SECTIONS" field="ID" access="ViewOnly"/>
+        <field table="SECTIONS" field="TEACHER" access="ViewOnly"/>
+        <field table="SECTIONS" field="COURSE_NUMBER" access="ViewOnly"/>
+        <field table="SECTIONS" field="SECTION_NUMBER" access="ViewOnly"/>
+        <field table="SECTIONS" field="GRADE_LEVEL" access="ViewOnly"/>
+        <field table="SECTIONS" field="EXPRESSION" access="ViewOnly"/>
+
+
+        <field table="TERMS" field="NAME" access="ViewOnly"/>
+        <field table="TERMS" field="FIRSTDAY" access="ViewOnly"/>
+        <field table="TERMS" field="LASTDAY" access="ViewOnly"/>
+
+    </access_request>
+</plugin>
