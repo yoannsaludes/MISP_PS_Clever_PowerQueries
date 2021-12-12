@@ -37,3 +37,4 @@ AND REGEXP_LIKE(teachers.teachernumber, '^[[:digit:]]+$')
         ]]>
     </sql>
 </query>
+</queries>
