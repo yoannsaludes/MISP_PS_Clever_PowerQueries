@@ -1,0 +1,26 @@
+<queries>
+<query name="fr.marymount.it.clever.enrollments" coreTable="CC" flattened="true">
+    <description>MISP CLever SFTP enrollments.csv</description>
+    <args>
+    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "31" />
+    </args>
+    <columns>
+    <column column="CC.SCHOOLID">School_id</column>
+    <column column="CC.SECTIONID">Section_id</column>
+    <column column="CC.STUDENTID">Student_id</column>
+    </columns>
+    <sql>
+        
+        <![CDATA[
+        select
+            c.schoolid as School_id,
+            c.sectionid as Section_id,
+            c.studentid as Student_id
+        from cc c
+        join students stu on stu.id = c.studentid
+        where stu.enroll_status = 0
+        AND SUBSTR(TO_CHAR(c.termid),1,2) = :termprefix
+        ]]>
+    </sql>
+</query>
+</queries>

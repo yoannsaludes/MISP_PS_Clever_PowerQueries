@@ -1,0 +1,54 @@
+<queries>
+<query name="fr.marymount.it.clever.schools" coreTable="SCHOOLS" flattened="true">
+	<description>MISP Clever SFTP schools.csv</description>
+	<args>
+	</args>
+	<columns>
+	<column column="SCHOOLS.SCHOOL_NUMBER">School_id</column>
+	<column column="SCHOOLS.NAME">School_name</column>
+	<column column="SCHOOLS.SCHOOL_NUMBER">School_number</column>
+	<column column="SCHOOLS.LOW_GRADE">Low_grade</column>
+	<column column="SCHOOLS.HIGH_GRADE">High_grade</column>
+	<column column="SCHOOLS.PRINCIPAL">Principal</column>
+	<column column="SCHOOLS.PRINCIPALEMAIL">Principal_email</column>
+	<column column="SCHOOLS.SCHOOLADDRESS">School_address</column>
+	<column column="SCHOOLS.SCHOOLCITY">School_city</column>
+	<column column="SCHOOLS.SCHOOLSTATE">School_state</column>
+	<column column="SCHOOLS.SCHOOLZIP">School_zip</column>
+	<column column="SCHOOLS.SCHOOLPHONE">School_phone</column>
+		</columns>
+	<sql>
+		<![CDATA[
+		select
+		schools.school_number as school_id,
+		schools.name as School_name,
+		schools.school_number as School_number,
+		case
+			when schools.low_grade = -3 then 'InfantToddler'
+			when schools.low_grade = -1 then 'Preschool'
+			when schools.low_grade = -1 then 'PreKindergarten'
+			when schools.low_grade = 0 then 'Kindergarten'
+			when schools.low_grade > 12 then 'Postgraduate'
+			else to_char(schools.low_grade)
+		end as Low_grade,
+		case 
+			when schools.high_grade = -3 then 'InfantToddler'
+			when schools.high_grade = -1 then 'Preschool'
+			when schools.high_grade = -1 then 'PreKindergarten'
+			when schools.high_grade = 0 then 'Kindergarten'
+			when schools.high_grade > 12 then 'Postgraduate'
+			else to_char(schools.high_grade)
+		end as High_grade,
+		schools.principal,
+		schools.principalemail as Principal_email,
+		schools.schooladdress as School_address,
+		schools.schoolcity as School_city,
+		schools.schoolstate as School_state,
+		schools.schoolzip as School_zip,
+		schools.schoolphone as School_phone
+		FROM schools
+		WHERE school_number < 999999
+		]]>
+	</sql>
+</query>
+</queries>

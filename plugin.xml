@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd"
         name="MISP Clever SFTP"
-        version="1.0.1"
+        version="1.1.1"
         description="MISP Clever SFTP CSV files Generation">
     <oauth></oauth>
     <publisher name="Marymount International School, Paris">
@@ -36,8 +36,18 @@
         <field table="U_DEF_EXT_STUDENTS" field="ADMISS_SSPRO_EAL" access="ViewOnly"/>
         <field table="U_DEF_EXT_STUDENTS" field="ADMISS_SSPRO_ILC" access="ViewOnly"/>
 
-        <field table="TEACHERS" field="SCHOOLID" access="ViewOnly"/>
-        <field table="TEACHERS" field="ID" access="ViewOnly"/>
+        <field table="USERS" field="DCID" access="ViewOnly"/>
+        <field table="USERS" field="HOMESCHOOLID" access="ViewOnly"/>        
+        <field table="USERS" field="TEACHERNUMBER" access="ViewOnly"/>
+        <field table="USERS" field="EMAIL_ADDR" access="ViewOnly"/>
+        <field table="USERS" field="FIRST_NAME" access="ViewOnly"/>
+        <field table="USERS" field="MIDDLE_NAME" access="ViewOnly"/>
+        <field table="USERS" field="LAST_NAME" access="ViewOnly"/>
+        <field table="USERS" field="TITLE" access="ViewOnly"/>
+        <field table="USERS" field="HOME_PHONE" access="ViewOnly"/>
+
+        <field table="TEACHERS" field="HOMESCHOOLID" access="ViewOnly"/>
+        <field table="TEACHERS" field="DCID" access="ViewOnly"/>
         <field table="TEACHERS" field="TEACHERNUMBER" access="ViewOnly"/>
         <field table="TEACHERS" field="EMAIL_ADDR" access="ViewOnly"/>
         <field table="TEACHERS" field="FIRST_NAME" access="ViewOnly"/>

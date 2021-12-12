@@ -1,0 +1,72 @@
+<queries>
+<query name="fr.marymount.it.clever.sections" coreTable="SECTIONS" flattened="true">
+    <description>MISP Clever SFTP sections.csv</description>
+    <args>
+    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "31" />
+    </args>
+    <columns>
+    <column column="SECTIONS.SCHOOLID">School_id</column>
+    <column column="SECTIONS.ID">Section_id</column>
+    <column column="SECTIONS.TEACHER">Teacher_id</column>
+    <column column="SECTIONS.TEACHER">Teacher_2_id</column>
+    <column column="SECTIONS.TEACHER">Teacher_3_id</column>
+    <column column="SECTIONS.TEACHER">Teacher_4_id</column>
+    <column column="SECTIONS.COURSE_NUMBER">Name</column>
+    <column column="SECTIONS.SECTION_NUMBER">Section_number</column>
+    <column column="SECTIONS.GRADE_LEVEL">Grade</column>
+    <column column="COURSES.COURSE_NAME">Course_name</column>
+    <column column="SECTIONS.COURSE_NUMBER">Course_number</column>
+    <column column="SECTIONS.COURSE_NUMBER">Course_description</column>
+    <column column="SECTIONS.EXPRESSION">Period</column>
+    <column column="SECTIONS.EXPRESSION">Subject</column>
+    <column column="TERMS.NAME">Term_name</column>
+    <column column="TERMS.FIRSTDAY">Term_start</column>
+    <column column="TERMS.LASTDAY">Term_end</column>
+    </columns>
+    <sql>
+        <![CDATA[
+        SELECT
+        sec.schoolid as School_id,
+        sec.id as Section_id,
+        teachers.teachernumber as Teacher_id,
+        (select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+            inner join teachers t on t.id = SectionTeacher.teacherid
+            where sectionteacher.roleid != 21
+            and SectionTeacher.sectionid = sec.id
+            order by teacherid) where rn = 2) as Teacher_2_id,
+        (select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+            inner join teachers t on t.id = SectionTeacher.teacherid
+            where sectionteacher.roleid != 21
+            and SectionTeacher.sectionid = sec.id
+            order by teacherid) where rn = 3) as Teacher_3_id,
+        (select teacherid from (select t.teachernumber as teacherid, rownum rn from SectionTeacher
+            inner join teachers t on t.id = SectionTeacher.teacherid
+            where sectionteacher.roleid != 21
+            and SectionTeacher.sectionid = sec.id
+            order by teacherid) where rn = 4) as Teacher_4_id,
+        courses.course_name||' with '||teachers.first_name||' '||teachers.last_name||' ('||courses.course_number||'.'||sec.section_number||')' as Name,
+        sec.section_number as Section_Number,
+        case 
+            when sec.grade_level = -3 then 'InfantToddler'
+            when sec.grade_level = -1 then 'Preschool'
+            when sec.grade_level = -1 then 'PreKindergarten'
+            when sec.grade_level = 0 then 'Kindergarten'
+            when sec.grade_level > 12 then 'Postgraduate'
+            else to_char(sec.grade_level)
+        end as Grade,
+        courses.course_name,
+        sec.course_number,
+        '' as course_description,
+        sec.external_expression as Period,
+        '' as subject,
+        (select name from terms where id = sec.termid and schoolid = sec.schoolid) Term_name,
+        TO_CHAR((select firstday from terms where id = sec.termid and schoolid = sec.schoolid),'MM/DD/YYYY') Term_start,
+        TO_CHAR((select lastday from terms where id = sec.termid and schoolid = sec.schoolid),'MM/DD/YYYY') Term_end
+        from sections sec
+        join courses  on courses.course_number = sec.course_number
+        join teachers on sec.teacher = teachers.id
+        where SUBSTR(TO_CHAR(sec.termid),1,2) = :termprefix
+        ]]>
+    </sql>
+</query>
+</queries>

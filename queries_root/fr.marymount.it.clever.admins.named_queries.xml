@@ -1,0 +1,33 @@
+<queries>
+<query name="fr.marymount.it.clever.admins" coreTable="TEACHERS" flattened="true">
+    <description>MISP Clever SFTP staff.csv</description>
+    <args>
+    </args>
+    <columns>
+    <column column="TEACHERS.HOMESCHOOLID">School_id</column>
+    <column column="TEACHERS.TEACHERNUMBER">Staff_id</column>
+    <column column="TEACHERS.EMAIL_ADDR">Admin_email</column>
+    <column column="TEACHERS.FIRST_NAME">First_name</column>
+    <column column="TEACHERS.LAST_NAME">Last_name</column>
+    <column column="TEACHERS.TITLE">Admin_title</column>
+    <column column="TEACHERS.EMAIL_ADDR">Username</column>
+    <column column="TEACHERS.HOME_PHONE">ext.Phone</column>
+    </columns>
+    <sql>
+        
+        <![CDATA[
+        SELECT
+            'DEFAULT_DISTRICT_OFFICE' as School_id,
+            teachernumber,
+            email_addr,
+            first_name,
+            last_name,
+            title,
+            email_addr as username,
+            home_phone
+        FROM teachers
+        WHERE (psaccess = 1 and groupvalue in (1,2,3,4,9,10,11) and status = 1)
+        ]]>
+    </sql>
+</query>
+</queries>

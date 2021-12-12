@@ -1,0 +1,95 @@
+<queries>
+<query name="fr.marymount.it.clever.students" coreTable="STUDENTS" flattened="true">
+    <description>MISP Clever SFTP students.csv</description>
+    <args>
+    </args>
+    <columns>
+    <column column="STUDENTS.SCHOOLID">School_id</column>
+    <column column="STUDENTS.ID">Student_id</column>
+    <column column="STUDENTS.STUDENT_NUMBER">Student_number</column>
+    <column column="STUDENTS.STATE_STUDENTNUMBER">State_id</column>
+    <column column="STUDENTS.LAST_NAME">Last_name</column>
+    <column column="STUDENTS.MIDDLE_NAME">Middle_name</column>
+    <column column="STUDENTS.FIRST_NAME">First_name</column>
+    <column column="STUDENTS.GRADE_LEVEL">Grade</column>
+    <column column="STUDENTS.GENDER">Gender</column>
+    <column column="STUDENTS.DOB">DOB</column>
+    <column column="STUDENTS.ETHNICITY">Race</column>
+    <column column="STUDENTS.FEDETHNICITY">Hispanic_Latino</column>
+    <column column="U_DEF_EXT_STUDENTS.ADMISS_SSPRO_EAL">Ell_status</column>
+    <column column="STUDENTS.LUNCHSTATUS">Frl_status</column>
+    <column column="U_DEF_EXT_STUDENTS.ADMISS_SSPRO_ILC">IEP_status</column>
+    <column column="STUDENTS.STREET">Student_street</column>
+    <column column="STUDENTS.CITY">Student_city</column>
+    <column column="STUDENTS.STATE">Student_state</column>
+    <column column="STUDENTS.ZIP">Student_zip</column>
+    <column column="U_DEF_EXT_STUDENTS.EMAIL">Student email</column>
+    <column column="U_DEF_EXT_STUDENTS.EMAIL">Username</column>
+    <column column="U_DEF_EXT_STUDENTS.PASSWORD">Password</column>
+        </columns>
+    <sql>
+        <![CDATA[
+SELECT
+st.schoolid as School_id,
+st.ID as student_id,
+st.student_number as Student_number,
+st.State_StudentNumber as State_id,
+st.last_name as Last_name,
+st.middle_name as Middle_name,
+st.first_name as First_name,
+CASE
+WHEN st.grade_level = -3 THEN
+'InfantToddler'
+WHEN st.grade_level = -2 THEN
+'Preschool'
+WHEN st.grade_level = -1 THEN
+'PreKindergarten'
+WHEN st.grade_level = 0 THEN
+'Kindergarten'
+WHEN st.grade_level > 12 THEN
+'Postgraduate'
+ELSE
+TO_CHAR(st.grade_level)
+END AS Grade,
+st.gender as Gender,
+TO_CHAR(st.dob, 'mm/dd/yyyy') dob,
+CASE
+WHEN st.Ethnicity IN('A', 'B', 'I', 'M', 'P', 'W') THEN
+st.Ethnicity
+ELSE
+''
+END AS Race,
+CASE
+WHEN st.FedEthnicity = 1 THEN
+'Y'
+ELSE
+'N'
+END AS Hispanic,
+CASE
+WHEN stext.admiss_sspro_eal = 'Yes' THEN
+'Y'
+ELSE
+'N'
+END AS ell_status,
+st.LunchStatus,
+CASE
+WHEN stext.admiss_sspro_ilc = 'Yes' THEN
+'Y'
+ELSE
+'N'
+END AS IEP_status,
+st.street,
+st.city,
+st.state,
+st.zip,
+stext.email as Student_email,
+stext.email as Username,
+stext.password as Password
+
+FROM students st
+INNER JOIN u_def_ext_students stext ON st.dcid = stext.studentsdcid
+WHERE st.enroll_status = 0
+        ]]>
+    </sql>
+</query>
+</queries>
