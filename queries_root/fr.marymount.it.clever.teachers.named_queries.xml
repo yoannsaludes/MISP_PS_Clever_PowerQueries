@@ -1,11 +1,11 @@
 <queries>
-<query name="fr.marymount.it.clever.teachers" coreTable="USERS" flattened="true">
+<query name="fr.marymount.it.clever.teachers" coreTable="TEACHERS" flattened="true">
     <description>MISP Clever SFTP teachers.csv</description>
     <args>
     </args>
     <columns>
     <column column="TEACHERS.HOMESCHOOLID">School_id</column>
-    <column column="TEACHERS.DCID">Teacher_id</column>
+    <column column="TEACHERS.TEACHERNUMBER">Teacher_id</column>
     <column column="TEACHERS.TEACHERNUMBER">Teacher_number</column>
     <column column="TEACHERS.EMAIL_ADDR">Teacher_email</column>
     <column column="TEACHERS.FIRST_NAME">First_name</column>
@@ -18,7 +18,7 @@
         <![CDATA[
 SELECT
     teachers.homeschoolid as School_id,
-    teachers.dcid as Teacher_id,
+    teachers.teachernumber as Teacher_id,
     teachers.teachernumber as Teacher_number,
     teachers.email_addr as Teacher_email,
     teachers.first_name as First_name,
@@ -33,7 +33,6 @@ INNER JOIN
      ON teachers.email_addr = uniq.email_addr
      AND teachers.id = uniq.id
 WHERE teachers.ptaccess = 1
-AND REGEXP_LIKE(teachers.teachernumber, '^[[:digit:]]+$')
         ]]>
     </sql>
 </query>
