@@ -2,7 +2,7 @@
 <query name="fr.marymount.it.clever.enrollments" coreTable="CC" flattened="true">
     <description>MISP CLever SFTP enrollments.csv</description>
     <args>
-    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "31" />
+    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "32" />
     </args>
     <columns>
     <column column="CC.SCHOOLID">School_id</column>

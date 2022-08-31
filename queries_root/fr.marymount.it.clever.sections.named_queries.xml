@@ -2,7 +2,7 @@
 <query name="fr.marymount.it.clever.sections" coreTable="SECTIONS" flattened="true">
     <description>MISP Clever SFTP sections.csv</description>
     <args>
-    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "31" />
+    <arg name="termprefix" column="CC.TERMID" type="primitive" required="true" default = "32" />
     </args>
     <columns>
     <column column="SECTIONS.SCHOOLID">School_id</column>

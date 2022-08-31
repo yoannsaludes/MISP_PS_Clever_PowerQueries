@@ -53,12 +53,7 @@ TO_CHAR(st.grade_level)
 END AS Grade,
 st.gender as Gender,
 TO_CHAR(st.dob, 'mm/dd/yyyy') dob,
-CASE
-WHEN st.Ethnicity IN('A', 'B', 'I', 'M', 'P', 'W') THEN
-st.Ethnicity
-ELSE
-''
-END AS Race,
+'Unknown' as Race,
 CASE
 WHEN st.FedEthnicity = 1 THEN
 'Y'
