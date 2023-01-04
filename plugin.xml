@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd"
         name="MISP Clever SFTP"
-        version="1.1.7"
+        version="2023.1.4"
         description="MISP Clever SFTP CSV files Generation">
     <oauth></oauth>
     <publisher name="Marymount International School, Paris">

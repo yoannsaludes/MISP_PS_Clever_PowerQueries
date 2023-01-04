@@ -83,8 +83,9 @@ stext.password as Password
 
 FROM students st
 INNER JOIN u_def_ext_students stext ON st.dcid = stext.studentsdcid
-WHERE st.enroll_status = 0
-        ]]>
+WHERE st.enroll_status <= 0
+AND Home_room is not null
+]]>
     </sql>
 </query>
 </queries>
